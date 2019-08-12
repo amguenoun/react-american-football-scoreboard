@@ -1,5 +1,5 @@
 //TODO: STEP 1 - Import the useState hook.
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import BottomRow from "./BottomRow";
 
@@ -8,7 +8,10 @@ function App() {
 
   const [homeScore, setHomeScore] = useState(0);
   const [awayScore, setAwayScore] = useState(0);
-
+  const [seconds, setSeconds] = useState(0);
+  const [secondTens, setSecondTens] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [minuteTens, setMinuteTens] = useState(0);
 
   const teamIncrement = (team, amount) => {
     if (team === "LIONS") {
@@ -19,7 +22,32 @@ function App() {
     }
   };
 
-
+  useEffect(() => {
+    setInterval(() => {
+      if (seconds === 9) {
+        if (secondTens === 5) {
+          if (minutes === 9) {
+            setMinuteTens(minuteTens + 1);
+            setMinutes(0);
+            setSeconds(0);
+            setSecondTens(0);
+          }
+          else {
+            setMinutes(minutes + 1);
+            setSeconds(0);
+            setSecondTens(0);
+          }
+        }
+        else {
+          setSecondTens(secondTens + 1);
+          setSeconds(0);
+        }
+      }
+      else {
+        setSeconds(seconds + 1);
+      }
+    }, 1000);
+  });
 
   return (
     <div className="container">
@@ -32,7 +60,7 @@ function App() {
 
             <div className="home__score">{homeScore}</div>
           </div>
-          <div className="timer">00:03</div>
+          <div className="timer">{minuteTens}{minutes}:{secondTens}{seconds}</div>
           <div className="away">
             <h2 className="away__name">Tigers</h2>
             <div className="away__score">{awayScore}</div>
