@@ -22,8 +22,10 @@ function App() {
     }
   };
 
+
+
   useEffect(() => {
-    setInterval(() => {
+    let interval = setInterval(() => {
       if (seconds === 9) {
         if (secondTens === 5) {
           if (minutes === 9) {
@@ -31,20 +33,24 @@ function App() {
             setMinutes(0);
             setSeconds(0);
             setSecondTens(0);
+            clearInterval(interval);
           }
           else {
             setMinutes(minutes + 1);
             setSeconds(0);
             setSecondTens(0);
+            clearInterval(interval);
           }
         }
         else {
           setSecondTens(secondTens + 1);
           setSeconds(0);
+          clearInterval(interval);
         }
       }
       else {
         setSeconds(seconds + 1);
+        clearInterval(interval);
       }
     }, 1000);
   });
