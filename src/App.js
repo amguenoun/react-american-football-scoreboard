@@ -9,6 +9,7 @@ function App() {
   const [homeScore, setHomeScore] = useState(0);
   const [awayScore, setAwayScore] = useState(0);
 
+
   const teamIncrement = (team, amount) => {
     if (team === "LIONS") {
       setHomeScore(homeScore + amount);
@@ -17,6 +18,8 @@ function App() {
       setAwayScore(awayScore + amount);
     }
   };
+
+
 
   return (
     <div className="container">
@@ -48,7 +51,7 @@ function App() {
           <button className="awayButtons__fieldGoal" onClick={() => teamIncrement("TIGERS", 3)}>Away Field Goal</button>
         </div>
       </section>
-    </div>
+    </div >
   );
 }
 
